@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
+
+    public DeckManager DeckManager;
     
     [SerializeField] private TitleScreen _titleScreenPanel;
     [SerializeField] private QuestionsMenu _questionsPanel;
@@ -12,6 +15,9 @@ public class GameController : MonoBehaviour
     [Header("Options Buttons")]
     [SerializeField] private Button _quitButton;
     [SerializeField] private Button _restartButton;
+    [SerializeField] private Button _deckTypeButton;
+    [SerializeField] private TextMeshProUGUI _deckTypeText;
+
 
     private void Awake()
     {
@@ -37,6 +43,11 @@ public class GameController : MonoBehaviour
         {
             ReturnToTitleScreen();
             _titleScreenPanel.StartCountdown();
+        });
+        _deckTypeButton.onClick.AddListener(() =>
+        {
+            DeckManager.ToggleDeck();
+            _deckTypeText.text = DeckManager.CurrentDeck.DeckName + " Deck";
         });
     }
 

@@ -50,7 +50,10 @@ public class QuestionsMenu : Menu
 
     private void TryPresentNextQuestion()
     {
-        if (_questionsPresented >= _numQuestions)
+        if (_countdownCoroutine != null)
+            StopCoroutine(_countdownCoroutine);
+        
+        if (GameHasEnded())
         {
             GameController.Instance.EndGame(_correctQuestionCount, _questionsPresented);
             return;
@@ -60,6 +63,11 @@ public class QuestionsMenu : Menu
         _questionPresenter.PresentQuestion();
 
         _questionsPresented++;
+    }
+
+    private bool GameHasEnded()
+    {
+        return _questionsPresented >= _numQuestions;
     }
 
     private IEnumerator Countdown()

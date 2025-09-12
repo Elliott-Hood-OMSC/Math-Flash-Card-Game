@@ -6,7 +6,6 @@ public class QuestionPresenter : MonoBehaviour
 {
     private const int NUM_QUESTIONS = 3;
 
-    [SerializeField] private Sprite[] _cardSprites;
     [SerializeField] private Card _leftCard;
     [SerializeField] private Card _rightCard;
     [SerializeField] private List<AnswerCard> _answerCards;
@@ -70,17 +69,8 @@ public class QuestionPresenter : MonoBehaviour
             }
         }
 
-        _leftCard.SetSprite(GetSpriteForInt(finalNum1));
-        _rightCard.SetSprite(GetSpriteForInt(finalNum2));
-    }
-
-    private Sprite GetSpriteForInt(int value)
-    {
-        int numSuites = 4;
-        
-        int suitOffset = Random.Range(0, numSuites);
-        int rankIndex = (value - 1) * numSuites;
-        return _cardSprites[rankIndex + suitOffset];
+        _leftCard.SetCardValue(finalNum1);
+        _rightCard.SetCardValue(finalNum2);
     }
     
     public static void ShuffleList<T>(IList<T> list)
