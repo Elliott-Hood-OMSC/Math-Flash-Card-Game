@@ -865,7 +865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10.3}
+  m_AnchoredPosition: {x: 0, y: -10.299999}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217397986
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: numbered deck
+  m_text: default deck
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 300e1d9a4ff008a4daaf1257a62711f7, type: 2}
   m_sharedMaterial: {fileID: -8357979162862468732, guid: 300e1d9a4ff008a4daaf1257a62711f7, type: 2}
@@ -1140,7 +1140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49.8, y: -20.4}
+  m_AnchoredPosition: {x: -49.799988, y: -20.4}
   m_SizeDelta: {x: 90, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &351471651
@@ -1941,7 +1941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 3.7, y: -18.39299}
+  m_AnchoredPosition: {x: 3.7, y: -18.393005}
   m_SizeDelta: {x: 172.0331, y: 11.214}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &887917954
@@ -2443,6 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86ea5e58ae586747a830287639c4052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Countdown
+  _secondTime: 0.7
   _countdownText: {fileID: 507229608}
 --- !u!1 &1410626289
 GameObject:
@@ -2754,7 +2755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 51.8, y: -19.2}
+  m_AnchoredPosition: {x: 51.799988, y: -19.2}
   m_SizeDelta: {x: 119.18, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1561022401

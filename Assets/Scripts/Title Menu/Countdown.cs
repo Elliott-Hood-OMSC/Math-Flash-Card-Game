@@ -1,12 +1,21 @@
+using System;
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
+    [SerializeField] private float _secondTime = 0.7f;
     [SerializeField] private TextMeshProUGUI _countdownText;
     private Coroutine _currentCountdown;
-    
+    private Vector2 _originalTextAnchorPos;
+
+    private void Awake()
+    {
+        _originalTextAnchorPos = _countdownText.rectTransform.anchoredPosition;
+    }
+
     public void StartCountdown()
     {
         if (_currentCountdown != null)
@@ -17,13 +26,25 @@ public class Countdown : MonoBehaviour
     
     private IEnumerator CountdownCoroutine()
     {
+        void Shake()
+        {
+            DOTween.Sequence()
+                .Append(_countdownText.rectTransform.DOShakeAnchorPos(
+                    0.2f,
+                    10,
+                    vibrato: 30))
+                .Append(_countdownText.rectTransform.DOAnchorPos(_originalTextAnchorPos, 0.05f)); // smooth reset
+        }
+        
         for (int i = 5; i > 0; i--)
         {
             _countdownText.text = i.ToString();
-            yield return new WaitForSeconds(1);
+            Shake();
+            yield return new WaitForSeconds(_secondTime);
         }
         _countdownText.text = "Go!";
-        yield return new WaitForSeconds(1);
+        Shake();
+        yield return new WaitForSeconds(_secondTime);
         GameController.Instance.StartGame();
     }
 
