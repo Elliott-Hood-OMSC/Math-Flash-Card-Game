@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7701411915061852710}
   - component: {fileID: 6914391719566284765}
   - component: {fileID: 3302493592002108551}
+  - component: {fileID: 4620309801622337269}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -91,3 +92,15 @@ MonoBehaviour:
   m_EffectColor: {r: 0.037358474, g: 0.19999999, b: 0.08609388, a: 0.5}
   m_EffectDistance: {x: 7.4, y: -8.35}
   m_UseGraphicAlpha: 0
+--- !u!114 &4620309801622337269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5027877384854789817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c68cf0d5e1325843aa3095d4dcffc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Card
