@@ -1,0 +1,35 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
+[RequireComponent(typeof(Image))]
+public class Card : MonoBehaviour
+{
+    private Image _spriteRenderer;
+    private int _rank;
+    private int _suit;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        GameController.Instance.DeckManager.OnDeckChange.AddListener(UpdateVisuals);
+    }
+
+    public void SetCardValue(int cardRank)
+    {
+        _rank = cardRank;
+        _suit = Random.Range(0, 4);
+        UpdateVisuals();
+    }
+
+    private void UpdateVisuals()
+    {
+        Sprite randomSuitOfRank = GameController.Instance.DeckManager.CurrentDeck.GetCard(_rank, _suit);
+        _spriteRenderer.sprite = randomSuitOfRank;
+    }
+}

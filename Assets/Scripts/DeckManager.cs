@@ -1,0 +1,51 @@
+using UnityEngine;
+using UnityEngine.Events;
+
+public class DeckManager : MonoBehaviour
+{
+    [SerializeField] private Deck _defaultDeck;
+    [SerializeField] private Deck _numberedDeck;
+    public Deck CurrentDeck { get; private set; }
+    public readonly UnityEvent OnDeckChange = new UnityEvent();
+
+    private void Awake()
+    {
+        ChangeDeck(_defaultDeck);
+    }
+
+    public void ToggleDeck()
+    {
+        if (CurrentDeck == _defaultDeck)
+        {
+            ChangeDeck(_numberedDeck);
+        }
+        else
+        {
+            ChangeDeck(_defaultDeck);
+        }
+    }
+    
+    private void ChangeDeck(Deck newDeck)
+    {
+        if (CurrentDeck == newDeck)
+            return;
+        
+        CurrentDeck = newDeck;
+        OnDeckChange.Invoke();
+    }
+}
+
+[System.Serializable]
+public class Deck
+{
+    public string DeckName;
+    public Sprite[] CardSprites;
+
+    public Sprite GetCard(int rank, int suit)
+    {
+        int numSuites = 4;
+        int rankIndex = (rank - 1) * numSuites;
+
+        return CardSprites[rankIndex + suit];
+    }
+}
