@@ -1,0 +1,31 @@
+{
+    "alphabet": "~!\"#$%^&()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[/]^_'ABCDEFGHIJKLMNOPQRSTUVWXYZ{|} ",
+    "sprite_path": "CrownFont.png",
+    "atlas": {
+        "rows": 6,
+        "cols": 16,
+        "grid_width": 18,
+        "grid_height": 27,
+        "common_width": 11,
+        "character_widths": {
+            " ": 4,
+            "w": 17,
+            "W": 17,
+            "m": 17,
+            "M": 17,
+            "t": 9,
+            "T": 9,
+            "i": 9,
+            "I": 9,
+            "l": 9,
+            "L": 9,
+            "f": 10,
+            "F": 10,
+            "e": 10,
+            "E": 10,
+            "q": 13,
+            "Q": 13
+        }
+    },
+    "default_spacing": 1
+}
