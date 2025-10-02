@@ -12,7 +12,6 @@ public abstract class Achievement : ScriptableObject
     
     protected void GetAchievement()
     {
-        Debug.Log($"Achievement Got: {GetType()}!");
         AchievementEvents.OnAchievementGet?.Invoke(new AchievementEvents.OnAchievementGetArgs
         {
             AchievementObtained = this

@@ -6,6 +6,7 @@ public abstract class TieredAchievement : Achievement
     public class Tier
     {
         public int Requirement;
+        [HideInInspector]
         public bool Achieved;
     }
 
@@ -16,11 +17,13 @@ public abstract class TieredAchievement : Achievement
     {
         _progress++;
 
-        foreach (Tier tier in _tiers)
+        for (int index = 0; index < _tiers.Length; index++)
         {
+            Tier tier = _tiers[index];
             if (!tier.Achieved && _progress >= tier.Requirement)
             {
                 tier.Achieved = true;
+                Debug.Log($"{nameof(MathMaster)} {RomanNumerals.ToRoman(index + 1)} ({tier.Requirement}) Achieved!");
                 GetAchievement();
             }
         }
@@ -61,5 +64,41 @@ public abstract class TieredAchievement : Achievement
                 _tiers[i].Achieved = false;
             }
         }
+    }
+}
+
+public static class RomanNumerals
+{
+    private static readonly (int value, string symbol)[] _map =
+    {
+        (1000, "M"),
+        (900,  "CM"),
+        (500,  "D"),
+        (400,  "CD"),
+        (100,  "C"),
+        (90,   "XC"),
+        (50,   "L"),
+        (40,   "XL"),
+        (10,   "X"),
+        (9,    "IX"),
+        (5,    "V"),
+        (4,    "IV"),
+        (1,    "I"),
+    };
+
+    public static string ToRoman(int number)
+    {
+        if (number <= 0) return "";
+
+        var result = "";
+        foreach (var (value, symbol) in _map)
+        {
+            while (number >= value)
+            {
+                result += symbol;
+                number -= value;
+            }
+        }
+        return result;
     }
 }

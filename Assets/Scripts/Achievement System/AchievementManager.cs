@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
@@ -18,17 +17,10 @@ public class AchievementManager : MonoBehaviour
     [ContextMenu("Clear Save")]
     public void ClearSave()
     {
-        #if UNITY_EDITOR
-
-        if (!Application.isPlaying)
-        {
-            throw new Exception($"Cannot call {nameof(ClearSave)}() outside of playmode, as achievements are loaded in Awake().");
-        }
-        
-        #endif
-        
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+        
+        if (!Application.isPlaying) return;
         
         foreach (Achievement achievement in Achievements)
         {
