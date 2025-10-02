@@ -6,23 +6,21 @@ public abstract class Achievement : ScriptableObject
     public string Description;
     public Sprite Thumbnail;
     
-    public abstract void InitializeListener();
-
-    protected void GetAchievement()
+    protected abstract string AchievementSaveKey { get; }
+    
+    public abstract void Initialize();
+    
+    protected virtual void GetAchievement()
     {
+        Debug.Log($"Achievement Got: {GetType()}!");
         AchievementEvents.OnAchievementGet?.Invoke(new AchievementEvents.OnAchievementGetArgs
         {
             AchievementObtained = this
         });
     }
-    
-    public void Save()
-    {
-        
-    }
+    public abstract void ClearSave();
 
-    public void Load()
-    {
-        
-    }
+    public abstract void Save();
+
+    public abstract void Load();
 }

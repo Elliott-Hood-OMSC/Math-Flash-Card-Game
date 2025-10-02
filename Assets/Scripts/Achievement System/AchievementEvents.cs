@@ -4,29 +4,31 @@ public static class AchievementEvents
 {
     // On Achievement Get
     public static Action<OnAchievementGetArgs> OnAchievementGet;
-    public class OnAchievementGetArgs : AchievementArgs
+    public struct OnAchievementGetArgs
     {
         public Achievement AchievementObtained;
     }
     
     // On Round Ended 
     public static Action<OnRoundEndedArgs> OnRoundEnded;
-    public class OnRoundEndedArgs : AchievementArgs
+    public struct OnRoundEndedArgs
     {
         public int NumQuestionsAnswered;
-        public int NumQuestionsAnsweredCorrectly;
-        public float Time;
+        public int NumCorrectQuestions;
+        public float TotalTimeTaken;
     }
     
     // On Question Answered
     public static Action<OnQuestionAnsweredArgs> OnQuestionAnswered;
-    public class OnQuestionAnsweredArgs : AchievementArgs
+    public struct OnQuestionAnsweredArgs
     {
         public bool AnsweredCorrectly;
         public float TimeRemaining;
     }
-}
 
-public abstract class AchievementArgs
-{
+    // On Question Clicked
+    public static Action OnQuestionClicked;
+    
+    // On Second Passed
+    public static Action OnSecondPassed;
 }
