@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class TieredAchievement : Achievement
 {
+    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(GetHighestTier())}";
+    
     [System.Serializable]
     public class Tier
     {
@@ -13,6 +15,19 @@ public abstract class TieredAchievement : Achievement
     [SerializeField] private Tier[] _tiers;
     private int _progress;
 
+    protected int GetHighestTier()
+    {
+        for (int index = _tiers.Length - 1; index >= 0; index--)
+        {
+            Tier tier = _tiers[index];
+            if (_progress >= tier.Requirement)
+            {
+                return index + 1;
+            }
+        }
+        return 1;
+    }
+    
     protected void IncrementProgress()
     {
         _progress++;
@@ -23,7 +38,6 @@ public abstract class TieredAchievement : Achievement
             if (!tier.Achieved && _progress >= tier.Requirement)
             {
                 tier.Achieved = true;
-                Debug.Log($"{nameof(MathMaster)} {RomanNumerals.ToRoman(index + 1)} ({tier.Requirement}) Achieved!");
                 GetAchievement();
             }
         }

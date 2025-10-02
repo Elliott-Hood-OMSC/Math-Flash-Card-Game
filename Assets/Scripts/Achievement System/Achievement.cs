@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Achievement : ScriptableObject
 {
+    public virtual string AchievementTitle => GetType().ToString();
+    
     [TextArea]
     public string Description;
     public Sprite Thumbnail;
@@ -12,6 +14,7 @@ public abstract class Achievement : ScriptableObject
     
     protected void GetAchievement()
     {
+        Debug.Log($"{AchievementTitle} Achieved!");
         AchievementEvents.OnAchievementGet?.Invoke(new AchievementEvents.OnAchievementGetArgs
         {
             AchievementObtained = this
