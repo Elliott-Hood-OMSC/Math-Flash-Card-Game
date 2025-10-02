@@ -5,8 +5,6 @@ using Random = UnityEngine.Random;
 
 public class QuestionPresenter : MonoBehaviour
 {
-    private const int NUM_QUESTIONS = 3;
-
     [SerializeField] private Card _leftCard;
     [SerializeField] private Card _rightCard;
     [SerializeField] private List<AnswerCard> _answerCards;

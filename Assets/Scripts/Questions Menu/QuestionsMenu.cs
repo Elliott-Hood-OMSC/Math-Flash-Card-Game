@@ -45,8 +45,7 @@ public class QuestionsMenu : Menu
         }
         else
         {
-            if (_countdownCoroutine != null)
-                StopCoroutine(_countdownCoroutine);
+            if (_countdownCoroutine != null) StopCoroutine(_countdownCoroutine);
         }
     }
 
@@ -60,8 +59,7 @@ public class QuestionsMenu : Menu
 
     private void TryPresentNextQuestion()
     {
-        if (_countdownCoroutine != null)
-            StopCoroutine(_countdownCoroutine);
+        if (_countdownCoroutine != null) StopCoroutine(_countdownCoroutine);
         
         if (GameHasEnded())
         {
