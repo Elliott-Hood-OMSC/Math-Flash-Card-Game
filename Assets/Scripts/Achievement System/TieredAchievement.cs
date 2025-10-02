@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class TieredAchievement : Achievement
 {
-    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(GetHighestTier())}";
+    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(GetHighestTierNumber())}";
     
     [System.Serializable]
     public class Tier
@@ -15,17 +15,26 @@ public abstract class TieredAchievement : Achievement
     [SerializeField] private Tier[] _tiers;
     private int _progress;
 
-    protected int GetHighestTier()
+    public int GetHighestTierNumber()
+    {
+        GetHighestTier(out int tierNumber);
+        return tierNumber;
+    }
+    
+    public Tier GetHighestTier(out int tierNumber)
     {
         for (int index = _tiers.Length - 1; index >= 0; index--)
         {
             Tier tier = _tiers[index];
             if (_progress >= tier.Requirement)
             {
-                return index + 1;
+                tierNumber = index + 1;
+                return _tiers[index];
             }
         }
-        return 1;
+        
+        tierNumber = 1;
+        return _tiers[0];
     }
     
     protected void IncrementProgress()
@@ -104,7 +113,7 @@ public static class RomanNumerals
     {
         if (number <= 0) return "";
 
-        var result = "";
+        string result = "";
         foreach (var (value, symbol) in _map)
         {
             while (number >= value)
