@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using TMPro;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class QuestionsMenu : Menu
@@ -11,20 +9,30 @@ public class QuestionsMenu : Menu
     [SerializeField] private int _numQuestions = 3;
     [SerializeField] private int _timeLimit = 30;
     private Coroutine _countdownCoroutine;
-    private int _questionsPresented;
+    private int _questionsAnswered;
     private int _correctQuestionCount;
+    private int _timer;
 
+    private float _timeStarted;
+    
     private void Awake()
     {
-        _questionPresenter.OnAnsweredCorrectly.AddListener(() =>
+        _questionPresenter.OnAnswered += (bool answeredCorrectly) =>
         {
-            _correctQuestionCount++;
+            _questionsAnswered++;
+            if (answeredCorrectly)
+            {
+                _correctQuestionCount++;
+            }
+            
+            AchievementEvents.OnQuestionAnswered?.Invoke(new AchievementEvents.OnQuestionAnsweredArgs
+            {
+                AnsweredCorrectly = answeredCorrectly,
+                TimeRemaining = _timer
+            });
+            
             TryPresentNextQuestion();
-        });
-        _questionPresenter.OnAnsweredIncorrectly.AddListener(() =>
-        {
-            TryPresentNextQuestion();
-        });
+        };
     }
 
     public override void SetVisible(bool visible)
@@ -44,8 +52,9 @@ public class QuestionsMenu : Menu
 
     private void PresentAllQuestions()
     {
-        _questionsPresented = 0;
+        _questionsAnswered = 0;
         _correctQuestionCount = 0;
+        _timeStarted = Time.time;
         TryPresentNextQuestion();
     }
 
@@ -56,25 +65,30 @@ public class QuestionsMenu : Menu
         
         if (GameHasEnded())
         {
-            GameController.Instance.EndGame(_correctQuestionCount, _questionsPresented);
+            AchievementEvents.OnRoundEnded?.Invoke(new AchievementEvents.OnRoundEndedArgs
+            {
+                NumQuestionsAnswered = _questionsAnswered,
+                NumCorrectQuestions = _correctQuestionCount,
+                TotalTimeTaken = Time.time - _timeStarted,
+            });
+            GameController.Instance.EndGame(_correctQuestionCount, _questionsAnswered);
             return;
         }
         
         _countdownCoroutine = StartCoroutine(Countdown());
         _questionPresenter.PresentQuestion();
-
-        _questionsPresented++;
     }
 
     private bool GameHasEnded()
     {
-        return _questionsPresented >= _numQuestions;
+        return _questionsAnswered >= _numQuestions;
     }
 
     private IEnumerator Countdown()
     {
         for (int i = _timeLimit; i > 0; i--)
         {
+            _timer = i;
             _timerText.text = $"TimeRemaining: {i}";
             yield return new WaitForSeconds(1);
         }

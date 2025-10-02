@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class QuestionPresenter : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class QuestionPresenter : MonoBehaviour
     [SerializeField] private List<AnswerCard> _answerCards;
     private AnswerCard _correctCard;
 
-    public readonly UnityEvent OnAnsweredCorrectly = new UnityEvent();
-    public readonly UnityEvent OnAnsweredIncorrectly = new UnityEvent();
+    /// <summary>
+    /// Passes true if answered correctly
+    /// </summary>
+    public event Action<bool> OnAnswered;
     
     private void Awake()
     {
@@ -24,14 +27,7 @@ public class QuestionPresenter : MonoBehaviour
 
     private void OnAnswerCardClicked(AnswerCard card)
     {
-        if (card == _correctCard)
-        {
-            OnAnsweredCorrectly.Invoke();
-        }
-        else
-        {
-            OnAnsweredIncorrectly.Invoke();
-        }
+        OnAnswered?.Invoke(card == _correctCard);
     }
 
     public void PresentQuestion()
