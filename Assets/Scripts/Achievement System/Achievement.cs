@@ -5,12 +5,12 @@ public abstract class Achievement : ScriptableObject
     [TextArea]
     public string Description;
     public Sprite Thumbnail;
+
+    protected string AchievementSaveKey => GetType().Name;
     
-    protected abstract string AchievementSaveKey { get; }
+    public abstract void Subscribe();
     
-    public abstract void Initialize();
-    
-    protected virtual void GetAchievement()
+    protected void GetAchievement()
     {
         Debug.Log($"Achievement Got: {GetType()}!");
         AchievementEvents.OnAchievementGet?.Invoke(new AchievementEvents.OnAchievementGetArgs
@@ -18,7 +18,6 @@ public abstract class Achievement : ScriptableObject
             AchievementObtained = this
         });
     }
-    public abstract void ClearSave();
 
     public abstract void Save();
 

@@ -10,7 +10,8 @@ public class AchievementManager : MonoBehaviour
         Achievements = Resources.LoadAll<Achievement>("Achievements");
         foreach (Achievement achievement in Achievements)
         {
-            achievement.Initialize();
+            achievement.Load();
+            achievement.Subscribe();
         }
     }
 
@@ -26,9 +27,11 @@ public class AchievementManager : MonoBehaviour
         
         #endif
         
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        
         foreach (Achievement achievement in Achievements)
         {
-            achievement.ClearSave();
             achievement.Load();
         }
     }
