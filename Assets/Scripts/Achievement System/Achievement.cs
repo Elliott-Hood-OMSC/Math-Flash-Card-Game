@@ -11,6 +11,7 @@ public abstract class Achievement : ScriptableObject
     protected string AchievementSaveKey => GetType().Name;
     
     public abstract void Subscribe();
+    public abstract void Unsubscribe();
     
     protected void GetAchievement()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
@@ -11,6 +12,15 @@ public class AchievementManager : MonoBehaviour
         {
             achievement.Load();
             achievement.Subscribe();
+        }
+    }
+
+    public void OnDestroy()
+    {
+        foreach (Achievement achievement in Achievements)
+        {
+            achievement.Save();
+            achievement.Unsubscribe();
         }
     }
 

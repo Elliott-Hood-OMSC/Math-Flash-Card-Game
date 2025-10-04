@@ -7,6 +7,10 @@ public class MathMaster : TieredAchievement
     {
         AchievementEvents.OnQuestionAnswered += OnQuestionAnswered;
     }
+    public override void Unsubscribe()
+    {
+        AchievementEvents.OnQuestionAnswered -= OnQuestionAnswered;
+    }
 
     private void OnQuestionAnswered(AchievementEvents.OnQuestionAnsweredArgs obj)
     {
