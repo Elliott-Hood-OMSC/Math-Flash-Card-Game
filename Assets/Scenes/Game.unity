@@ -2054,6 +2054,7 @@ GameObject:
   - component: {fileID: 986616220}
   - component: {fileID: 986616219}
   - component: {fileID: 986616221}
+  - component: {fileID: 986616222}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -2218,6 +2219,18 @@ MonoBehaviour:
     - {fileID: 344227385357349484, guid: 2cd1f17d666b08e43b293a319a4dc06d, type: 3}
     - {fileID: -2305235217638359286, guid: 2cd1f17d666b08e43b293a319a4dc06d, type: 3}
     - {fileID: -7637587108010056368, guid: 2cd1f17d666b08e43b293a319a4dc06d, type: 3}
+--- !u!114 &986616222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986616218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a78f78f40c555a42aa2b5ef5177c8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
 --- !u!1 &994249863
 GameObject:
   m_ObjectHideFlags: 0
