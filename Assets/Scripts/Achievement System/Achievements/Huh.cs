@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Achievements/" + nameof(Huh), fileName = nameof(Huh))]
 public class Huh : Achievement
 {
     private bool _achievementGotten;
