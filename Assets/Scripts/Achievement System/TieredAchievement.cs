@@ -2,61 +2,71 @@ using UnityEngine;
 
 public abstract class TieredAchievement : Achievement
 {
-    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(GetHighestTierNumber())}";
+    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(_currentTierIndex+1)}";
+    public override string AchievementDescription => _currentTier.TierDescription;
+    public override Sprite AchievementThumbnail => _currentTier.TierThumbnail;
     
     [System.Serializable]
     public class Tier
     {
         public int Requirement;
+        public string TierDescription;
+        public Sprite TierThumbnail;
+
         [HideInInspector]
         public bool Achieved;
     }
 
     [SerializeField] private Tier[] _tiers;
+    private Tier _currentTier; // Refers to the tier you are currently trying to complete
+    private int _currentTierIndex;
+
     private int _progress;
 
-    public int GetHighestTierNumber()
-    {
-        GetHighestTier(out int tierNumber);
-        return tierNumber;
-    }
-    
-    public Tier GetHighestTier(out int tierNumber)
-    {
-        for (int index = _tiers.Length - 1; index >= 0; index--)
-        {
-            Tier tier = _tiers[index];
-            if (_progress >= tier.Requirement)
-            {
-                tierNumber = index + 1;
-                return _tiers[index];
-            }
-        }
-        
-        tierNumber = 1;
-        return _tiers[0];
-    }
-    
+    public int GetProgressValue() => _progress;
+    public int GetTierRequirement() => _currentTier.Requirement;
+    public float GetProgressPercentage() => (float)GetProgressValue() / GetTierRequirement();
+
     protected void IncrementProgress()
     {
         _progress++;
 
-        for (int index = 0; index < _tiers.Length; index++)
+        AchievementEvents.OnTieredAchievementProgressed.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
         {
-            Tier tier = _tiers[index];
-            if (!tier.Achieved && _progress >= tier.Requirement)
-            {
-                tier.Achieved = true;
-                GetAchievement();
-            }
+            tieredAchievement = this,
+        });
+
+        if (!IsMaxed && _progress >= _currentTier.Requirement)
+        {
+            IncreaseTier();
+        }
+    }
+
+    private void IncreaseTier()
+    {
+        GetAchievement();
+
+        _currentTier.Achieved = true;
+
+        bool isLastTier = _currentTierIndex == _tiers.Length - 1;
+        if (!isLastTier)
+        {
+            _currentTierIndex++;
+            _currentTier = _tiers[_currentTierIndex];
         }
 
-        Save();
+        AchievementEvents.OnTieredAchievementProgressed.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        {
+            tieredAchievement = this,
+        });
     }
+
+    public override bool IsMaxed => (_currentTierIndex == _tiers.Length - 1) && _currentTier.Achieved;
 
     public override void Save()
     {
-        PlayerPrefs.SetInt(AchievementSaveKey, _progress);
+        base.Save();
+        PlayerPrefs.SetInt(AchievementSaveKey + "_progress", _progress);
 
         string[] tierStates = new string[_tiers.Length];
         for (int i = 0; i < _tiers.Length; i++)
@@ -71,20 +81,30 @@ public abstract class TieredAchievement : Achievement
 
     public override void Load()
     {
-        _progress = PlayerPrefs.GetInt(AchievementSaveKey, 0);
+        base.Load();
+        _progress = PlayerPrefs.GetInt(AchievementSaveKey + "_progress", 0);
 
         string tierString = PlayerPrefs.GetString(AchievementSaveKey + "_tiers", "");
         string[] states = tierString.Split(',');
 
+        _currentTier = _tiers[0];
+        _currentTierIndex = 0;
+
         for (int i = 0; i < _tiers.Length; i++)
         {
-            if (i < states.Length)
-            {
-                _tiers[i].Achieved = states[i] == "1";
-            }
-            else
+            bool stringHasTierData = i < states.Length;
+            if (!stringHasTierData)
             {
                 _tiers[i].Achieved = false;
+                continue;
+            }
+
+            // Determine what is the current tier based off of data
+            _tiers[i].Achieved = states[i] == "1";
+            if (_tiers[i].Achieved)
+            {
+                _currentTierIndex = Mathf.Clamp(_currentTierIndex+1, 0, _tiers.Length-1);
+                _currentTier = _tiers[_currentTierIndex];
             }
         }
     }

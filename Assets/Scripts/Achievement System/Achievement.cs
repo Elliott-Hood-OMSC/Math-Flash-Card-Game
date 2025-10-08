@@ -3,10 +3,16 @@ using UnityEngine;
 public abstract class Achievement : ScriptableObject
 {
     public virtual string AchievementTitle => GetType().ToString();
+    public virtual string AchievementDescription => _description;
+    public virtual Sprite AchievementThumbnail => _thumbnail;
+    public bool HasAchievement => _achievementGotten;
+    private bool _achievementGotten = false;
+    
+    public virtual bool IsMaxed => _achievementGotten;
     
     [TextArea]
-    public string Description;
-    public Sprite Thumbnail;
+    [SerializeField] private string _description;
+    [SerializeField] private Sprite _thumbnail;
 
     protected string AchievementSaveKey => GetType().Name;
     
@@ -15,14 +21,23 @@ public abstract class Achievement : ScriptableObject
     
     protected void GetAchievement()
     {
-        Debug.Log($"{AchievementTitle} Achieved!");
+        if (IsMaxed) return;
+        
+        _achievementGotten = true;
+        Save();
         AchievementEvents.OnAchievementGet?.Invoke(new AchievementEvents.OnAchievementGetArgs
         {
             AchievementObtained = this
         });
     }
 
-    public abstract void Save();
+    public virtual void Save()
+    {
+        PlayerPrefs.SetInt(AchievementSaveKey + "_gotten", _achievementGotten ? 1 : 0);
+    }
 
-    public abstract void Load();
+    public virtual void Load()
+    {
+        _achievementGotten = PlayerPrefs.GetInt(AchievementSaveKey + "_gotten") == 1 ? true : false;
+    }
 }

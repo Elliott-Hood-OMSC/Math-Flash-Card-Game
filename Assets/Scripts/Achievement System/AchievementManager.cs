@@ -1,11 +1,26 @@
-using System;
 using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
+    public static AchievementManager Instance { get; private set; }
+
     public Achievement[] Achievements { get; private set; }
 
     public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        InitializeAchievements();
+    }
+
+    private void InitializeAchievements()
     {
         Achievements = Resources.LoadAll<Achievement>("Achievements");
         foreach (Achievement achievement in Achievements)
