@@ -31,7 +31,7 @@ public abstract class TieredAchievement : Achievement
     {
         _progress++;
 
-        AchievementEvents.OnTieredAchievementProgressed.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnTieredAchievementProgressed?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
         {
             tieredAchievement = this,
         });
@@ -55,7 +55,7 @@ public abstract class TieredAchievement : Achievement
             _currentTier = _tiers[_currentTierIndex];
         }
 
-        AchievementEvents.OnTieredAchievementProgressed.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnTieredAchievementProgressed?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
         {
             tieredAchievement = this,
         });
