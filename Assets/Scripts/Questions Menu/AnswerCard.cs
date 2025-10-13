@@ -9,6 +9,7 @@ public class AnswerCard : MonoBehaviour
 {
     [SerializeField] private RectTransform _visualsAnchor;
     [SerializeField] private float _clickShakeIntensity = 10f;
+    [SerializeField] private int _clickShakeVibrato = 20;
     [SerializeField] private float _shakeRotationIntensity = 10f;
     [SerializeField] private float _selectionAnimationDuration = 0.2f;
     [SerializeField] private int _selectionAnimationVibrato = 30;
@@ -77,7 +78,7 @@ public class AnswerCard : MonoBehaviour
             .Append(_visualsAnchor.DOShakeAnchorPos(
                 _selectionAnimationDuration,
                 _clickShakeIntensity,
-                vibrato: _selectionAnimationVibrato))
+                vibrato: _clickShakeVibrato))
             .Append(_visualsAnchor.DOAnchorPos(_originalAnchorPos, 0.05f)); // smooth reset
 
         OnClick?.Invoke();

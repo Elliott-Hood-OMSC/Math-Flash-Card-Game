@@ -2,14 +2,29 @@ using System;
 
 public static class AchievementEvents
 {
-    // On Achievement Get
+    #region Internal Achievement Events
+    
+    public static Action OnRefreshAllAchievements;
+    
     public static Action<OnAchievementGetArgs> OnAchievementGet;
     public struct OnAchievementGetArgs
     {
         public Achievement AchievementObtained;
     }
+
+    public static Action<OnTieredAchievementProgressedArgs> OnProgressUpdated;
+    public struct OnTieredAchievementProgressedArgs
+    {
+        public TieredAchievement TieredAchievement;
+    }
     
-    // On Round Ended 
+    #endregion
+    
+    #region Per-Project Events
+
+    public static Action OnQuestionClicked;
+    public static Action OnSecondPassed;
+    
     public static Action<OnRoundEndedArgs> OnRoundEnded;
     public struct OnRoundEndedArgs
     {
@@ -18,17 +33,12 @@ public static class AchievementEvents
         public float TotalTimeTaken;
     }
     
-    // On Question Answered
     public static Action<OnQuestionAnsweredArgs> OnQuestionAnswered;
     public struct OnQuestionAnsweredArgs
     {
         public bool AnsweredCorrectly;
         public float TimeRemaining;
     }
-
-    // On Question Clicked
-    public static Action OnQuestionClicked;
     
-    // On Second Passed
-    public static Action OnSecondPassed;
+    #endregion
 }
