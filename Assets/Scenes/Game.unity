@@ -3290,7 +3290,6 @@ RectTransform:
   - {fileID: 507229607}
   - {fileID: 994249864}
   - {fileID: 1742898396}
-  - {fileID: 1347462084}
   m_Father: {fileID: 1738561267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3332,6 +3331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TitleScreen
   _countdown: {fileID: 1110595834}
   _startButton: {fileID: 994249865}
+  _achievementsButton: {fileID: 1742898398}
 --- !u!114 &1110595834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3344,7 +3344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86ea5e58ae586747a830287639c4052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Countdown
-  _secondTime: 0.7
+  _secondTime: 0.6
   _countdownText: {fileID: 507229608}
 --- !u!1 &1347462083
 GameObject:
@@ -3370,7 +3370,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347462083}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -4050}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3378,7 +3378,7 @@ RectTransform:
   - {fileID: 391887043}
   - {fileID: 560607805}
   - {fileID: 1637704764}
-  m_Father: {fileID: 1110595829}
+  m_Father: {fileID: 1738561267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3407,7 +3407,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1373043295}
   - component: {fileID: 1373043294}
-  - component: {fileID: 1373043293}
   m_Layer: 0
   m_Name: Achievement Manager
   m_TagString: Untagged
@@ -3415,23 +3414,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1373043293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373043292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8374965083f71e439cf6fb72939f04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::AchievementEventsLogger
-  logAchievementGet: 1
-  logTieredAchievementProgressed: 1
-  logQuestionAnswered: 1
-  logRoundEnded: 1
-  logHuhButton: 1
 --- !u!114 &1373043294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3950,7 +3932,7 @@ GameObject:
   - component: {fileID: 1650502549}
   - component: {fileID: 1650502550}
   m_Layer: 5
-  m_Name: Questikon Cards
+  m_Name: Question Cards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4103,6 +4085,7 @@ RectTransform:
   - {fileID: 585534146}
   - {fileID: 1931593054}
   - {fileID: 439900037}
+  - {fileID: 1347462084}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

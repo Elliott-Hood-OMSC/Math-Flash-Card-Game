@@ -271,10 +271,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnswerCard
   _visualsAnchor: {fileID: 8837970893549147191}
-  _shakeIntensity: 4
-  _shakeRotationIntensity: 10
+  _clickShakeIntensity: 10
+  _clickShakeVibrato: 25
+  _shakeRotationIntensity: 8
   _selectionAnimationDuration: 0.2
-  _selectionAnimationVibrato: 30
+  _selectionAnimationVibrato: 25
   _scaleSelectedMultiplier: 1.1
   _text: {fileID: 2915881808638349914}
 --- !u!1001 &7258009839819081191

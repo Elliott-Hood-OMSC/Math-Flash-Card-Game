@@ -11,14 +11,13 @@ public class AchievementManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            return;
         }
         else
         {
+            DontDestroyOnLoad(gameObject);
             Instance = this;
+            InitializeAchievements();
         }
-
-        InitializeAchievements();
     }
 
     private void InitializeAchievements()
@@ -52,5 +51,7 @@ public class AchievementManager : MonoBehaviour
         {
             achievement.Load();
         }
+        
+        AchievementEvents.OnRefreshAllAchievements?.Invoke();
     }
 }

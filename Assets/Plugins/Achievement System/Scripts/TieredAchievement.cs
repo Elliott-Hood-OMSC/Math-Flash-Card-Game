@@ -29,11 +29,18 @@ public abstract class TieredAchievement : Achievement
 
     protected void IncrementProgress()
     {
+        int maxValue = _tiers[^1].Requirement;
+        if (_progress >= maxValue)
+        {
+            _progress = maxValue;
+            return;
+        }
+        
         _progress++;
 
-        AchievementEvents.OnTieredAchievementProgressed?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnProgressUpdated?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
         {
-            tieredAchievement = this,
+            TieredAchievement = this,
         });
 
         if (!IsMaxed && _progress >= _currentTier.Requirement)
@@ -55,9 +62,9 @@ public abstract class TieredAchievement : Achievement
             _currentTier = _tiers[_currentTierIndex];
         }
 
-        AchievementEvents.OnTieredAchievementProgressed?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnProgressUpdated?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
         {
-            tieredAchievement = this,
+            TieredAchievement = this,
         });
     }
 

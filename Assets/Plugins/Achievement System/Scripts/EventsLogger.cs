@@ -18,11 +18,11 @@ public class AchievementEventsLogger : MonoBehaviour
             Debug.Log($"{args.AchievementObtained.AchievementTitle} Achieved!");
         };
 
-        AchievementEvents.OnTieredAchievementProgressed += (AchievementEvents.OnTieredAchievementProgressedArgs args) =>
+        AchievementEvents.OnProgressUpdated += (AchievementEvents.OnTieredAchievementProgressedArgs args) =>
         {
             if (!logTieredAchievementProgressed) return;
-            string progress = $"{args.tieredAchievement.GetProgressValue()} / {args.tieredAchievement.GetTierRequirement()}";
-            Debug.Log($"{args.tieredAchievement.AchievementTitle} was progressed! Now it is {progress}");
+            string progress = $"{args.TieredAchievement.GetProgressValue()} / {args.TieredAchievement.GetTierRequirement()}";
+            Debug.Log($"{args.TieredAchievement.AchievementTitle} was progressed! Now it is {progress}");
         };
 
         AchievementEvents.OnQuestionAnswered += (AchievementEvents.OnQuestionAnsweredArgs args) =>

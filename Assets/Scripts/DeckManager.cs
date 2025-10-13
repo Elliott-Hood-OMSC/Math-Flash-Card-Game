@@ -40,11 +40,12 @@ public class Deck
 {
     public string DeckName;
     public Sprite[] CardSprites;
+    
+    const int NUM_SUITES = 4;
 
     public Sprite GetCard(int rank, int suit)
     {
-        int numSuites = 4;
-        int rankIndex = (rank - 1) * numSuites;
+        int rankIndex = (rank - 1) * NUM_SUITES;
 
         return CardSprites[rankIndex + suit];
     }

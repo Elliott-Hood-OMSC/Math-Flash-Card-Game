@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
         _restartButton.onClick.AddListener(() =>
         {
             ReturnToTitleScreen();
-            _titleScreenPanel.StartCountdown();
         });
         _deckTypeButton.onClick.AddListener(() =>
         {

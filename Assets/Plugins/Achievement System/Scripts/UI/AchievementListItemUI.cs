@@ -17,49 +17,65 @@ public class AchievementListItemUI : MonoBehaviour
     [SerializeField] private Color NormalColor;
     [SerializeField] private Color MaxedColor;
 
-    private CanvasGroup canvasGroup;
-
-    Achievement trackedAchievement;
+    private CanvasGroup _canvasGroup;
+    private Achievement _trackedAchievement;
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        AchievementEvents.OnRefreshAllAchievements += OnRefreshAllAchievements;
+        AchievementEvents.OnAchievementGet += OnAchievementGet;
+        AchievementEvents.OnProgressUpdated += OnTieredAchievementProgressed;
+    }
+
+    private void OnDestroy()
+    {
+        AchievementEvents.OnRefreshAllAchievements -= OnRefreshAllAchievements;
+        AchievementEvents.OnAchievementGet -= OnAchievementGet;
+        AchievementEvents.OnProgressUpdated -= OnTieredAchievementProgressed;
+    }
+
+    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementProgressedArgs obj)
+    {
+        UpdateUI();
+    }
+
+    private void OnAchievementGet(AchievementEvents.OnAchievementGetArgs obj)
+    {
+        UpdateUI();
+    }
+
+    private void OnRefreshAllAchievements()
+    {
+        UpdateUI();
     }
 
     public void TrackAchievement(Achievement achievement)
     {
-        trackedAchievement = achievement;
-        AchievementEvents.OnAchievementGet += _ => UpdateUI();
-        AchievementEvents.OnTieredAchievementProgressed += _ => UpdateUI();
+        _trackedAchievement = achievement;
         UpdateUI();
     }
 
-    public void UpdateUI()
+    private void UpdateUI()
     {
-        titleText.text = trackedAchievement.AchievementTitle;
-        descriptionText.text = trackedAchievement.AchievementDescription;
-        icon.sprite = trackedAchievement.AchievementThumbnail;
+        titleText.text = _trackedAchievement.AchievementTitle;
+        descriptionText.text = _trackedAchievement.AchievementDescription;
+        icon.sprite = _trackedAchievement.AchievementThumbnail;
 
-        panel.color = trackedAchievement.HasAchievement ? NormalColor : NotUnlockedColor;
+        panel.color = _trackedAchievement.HasAchievement ? NormalColor : NotUnlockedColor;
 
-        if (trackedAchievement is TieredAchievement)
+        if (_trackedAchievement is TieredAchievement)
         {
-            TieredAchievement tieredAchievement = trackedAchievement as TieredAchievement;
+            TieredAchievement tieredAchievement = _trackedAchievement as TieredAchievement;
             progressSlider.value = tieredAchievement.GetProgressPercentage();
             progressText.text = $"{tieredAchievement.GetProgressValue()} / {tieredAchievement.GetTierRequirement()}";
             if (tieredAchievement.IsMaxed) { panel.color = MaxedColor; }
         }
         else
         {
-            progressSlider.value = trackedAchievement.HasAchievement ? 1.0f : 0.0f;
-            int progress = trackedAchievement.HasAchievement ? 1 : 0;
+            progressSlider.value = _trackedAchievement.HasAchievement ? 1.0f : 0.0f;
+            int progress = _trackedAchievement.HasAchievement ? 1 : 0;
             progressText.text = $"{progress} / {1}";
-            if (trackedAchievement.HasAchievement) { panel.color = MaxedColor; }
+            if (_trackedAchievement.HasAchievement) { panel.color = MaxedColor; }
         }
-    }
-
-    public void SetOpacity(float newOpacity)
-    {
-        canvasGroup.alpha = Mathf.Clamp(newOpacity, 0.0f, 1.0f);
     }
 }
