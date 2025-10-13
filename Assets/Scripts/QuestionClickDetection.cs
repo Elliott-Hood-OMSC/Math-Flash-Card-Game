@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class HuhButtonListener : MonoBehaviour
+public class QuestionClickDetection : MonoBehaviour
 {
     private void Start()
     {
