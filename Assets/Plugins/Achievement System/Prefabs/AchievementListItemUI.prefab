@@ -130,7 +130,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 838.4, y: 136.62}
+  m_SizeDelta: {x: 1000, y: 136.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2660410996368074387
 CanvasRenderer:
@@ -270,8 +270,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play for 20 minutes blah blah blah blah blah
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
-  m_sharedMaterial: {fileID: -3650809518905469379, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -443,8 +443,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mathematician
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
-  m_sharedMaterial: {fileID: -3650809518905469379, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -892,8 +892,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5 / 20
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
-  m_sharedMaterial: {fileID: -3650809518905469379, guid: 144989e7c8f012144948a84a5cbcfab1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
