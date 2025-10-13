@@ -29,8 +29,11 @@ public class PlatinumMath : Achievement
     {
         foreach (Achievement achievement in AchievementManager.Instance.Achievements)
         {
-            if (achievement == this) continue;
-            if (!achievement.IsMaxed) return;
+            if (achievement == this) 
+                continue;
+            
+            if (!achievement.IsMaxed)
+                return;
         }
 
         GetAchievement();

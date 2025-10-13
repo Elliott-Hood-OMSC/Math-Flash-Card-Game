@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8453584f68c32344899af244fd7d9bf6, type: 3}
-  m_Name: PlatinumMath
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::PlatinumMath
-  _description: Unlock all other achievements.
+  m_Script: {fileID: 11500000, guid: 241b209143da20b4988ace12954618e9, type: 3}
+  m_Name: BuzzerBeater
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::BuzzerBeater
+  _description: Answer question correctly with less than a second left.
   _thumbnail: {fileID: 0}

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8453584f68c32344899af244fd7d9bf6, type: 3}
-  m_Name: PlatinumMath
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::PlatinumMath
-  _description: Unlock all other achievements.
+  m_Script: {fileID: 11500000, guid: 75933a34d2518154d93e408c0c1034fb, type: 3}
+  m_Name: Speedster
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Speedster
+  _description: Answer all questions correctly in less than 10 seconds.
   _thumbnail: {fileID: 0}

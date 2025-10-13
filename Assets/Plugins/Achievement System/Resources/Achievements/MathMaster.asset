@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d638f3c259f7e546a1f6b8c548a9f2d, type: 3}
   m_Name: MathMaster
   m_EditorClassIdentifier: Assembly-CSharp::MathMaster
-  _description: 
+  _description: Answer a total of X questions correctly.
   _thumbnail: {fileID: 0}
   _tiers:
-  - Requirement: 1
-    TierDescription: 
-    TierThumbnail: {fileID: 0}
-    Achieved: 1
-  - Requirement: 2
-    TierDescription: 
-    TierThumbnail: {fileID: 0}
-    Achieved: 1
   - Requirement: 3
-    TierDescription: 
+    TierDescription: Answer a total of 3 questions correctly.
+    TierThumbnail: {fileID: 0}
+    Achieved: 1
+  - Requirement: 5
+    TierDescription: Answer a total of 5 questions correctly.
+    TierThumbnail: {fileID: 0}
+    Achieved: 1
+  - Requirement: 10
+    TierDescription: Answer a total of 10 questions correctly.
     TierThumbnail: {fileID: 0}
     Achieved: 1
