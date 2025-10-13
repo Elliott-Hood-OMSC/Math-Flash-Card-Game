@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a668698bc77f3b4a985152486895716, type: 3}
   m_Name: GoldStar
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GoldStar
-  _description: Play X rounds.
+  _description: Play X perfect rounds.
   _thumbnail: {fileID: 0}
   _tiers:
   - Requirement: 5
-    TierDescription: Play 5 rounds.
+    TierDescription: Play 5 perfect rounds.
     TierThumbnail: {fileID: 0}
     Achieved: 0
