@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using TMPro;
@@ -18,12 +17,17 @@ public class Countdown : MonoBehaviour
 
     public void StartCountdown()
     {
-        if (_currentCountdown != null)
-            StopCoroutine(_currentCountdown);
-        
+        StopCountdown();
+
         _currentCountdown = StartCoroutine(CountdownCoroutine());
     }
-    
+
+    public void StopCountdown()
+    {
+        if (_currentCountdown != null)
+            StopCoroutine(_currentCountdown);
+    }
+
     private IEnumerator CountdownCoroutine()
     {
         void Shake()

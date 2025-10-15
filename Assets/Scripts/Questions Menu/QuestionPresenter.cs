@@ -8,6 +8,7 @@ public class QuestionPresenter : MonoBehaviour
     [SerializeField] private Card _leftCard;
     [SerializeField] private Card _rightCard;
     [SerializeField] private List<AnswerCard> _answerCards;
+    public int NumAnswerCards => _answerCards.Count;
     private AnswerCard _correctCard;
 
     /// <summary>
@@ -28,43 +29,26 @@ public class QuestionPresenter : MonoBehaviour
         OnAnswered?.Invoke(card == _correctCard);
     }
 
-    public void PresentQuestion()
+    public void PresentQuestion(QuestionInfo questionInfo)
     {
         ShuffleList(_answerCards);
 
-        HashSet<int> usedValues = new HashSet<int>();
-
-        int finalNum1 = 0;
-        int finalNum2 = 0;
-
-        for (int index = 0; index < _answerCards.Count; index++)
+        for (int i = 0; i < _answerCards.Count; i++)
         {
-            int num1, num2, product;
-
-            // Keep generating until we find a unique product
-            do
+            // There are n - 1 wrong answers, and 1 correct answer. Assign them accordingly
+            if (i < _answerCards.Count - 1)
             {
-                num1 = Random.Range(1, 13);
-                num2 = Random.Range(1, 13);
-                product = num1 * num2;
+                _answerCards[i].SetValue(questionInfo.WrongAnswers[i]);
             }
-            while (usedValues.Contains(product));
-
-            usedValues.Add(product);
-
-            _answerCards[index].SetValue(product);
-
-            // Assign the last one as the correct card
-            if (index == _answerCards.Count - 1)
+            else
             {
-                _correctCard = _answerCards[index];
-                finalNum1 = num1;
-                finalNum2 = num2;
+                _answerCards[i].SetValue(questionInfo.CorrectAnswer);
+                _correctCard = _answerCards[i];
             }
         }
 
-        _leftCard.SetCardValue(finalNum1);
-        _rightCard.SetCardValue(finalNum2);
+        _leftCard.SetCardValue(questionInfo.QuestionDisplay.Numbers[0]);
+        _rightCard.SetCardValue(questionInfo.QuestionDisplay.Numbers[1]);
     }
     
     public static void ShuffleList<T>(IList<T> list)

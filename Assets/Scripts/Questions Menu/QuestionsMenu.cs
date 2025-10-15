@@ -12,6 +12,7 @@ public class QuestionsMenu : Menu
     private int _questionsAnswered;
     private int _correctQuestionCount;
     private int _timer;
+    private QuestionGenerator _questionGenerator = new QuestionGeneratorMultiplication();
 
     private float _timeStarted;
     
@@ -74,7 +75,7 @@ public class QuestionsMenu : Menu
         }
         
         _countdownCoroutine = StartCoroutine(Countdown());
-        _questionPresenter.PresentQuestion();
+        _questionPresenter.PresentQuestion(_questionGenerator.GetQuestionInfo(_questionPresenter.NumAnswerCards));
     }
 
     private bool GameHasEnded()

@@ -20,7 +20,14 @@ public class TitleScreen : Menu
         _startButton.onClick.AddListener(StartCountdown);
     }
 
-    public void StartCountdown()
+    public void StopCountdown()
+    {
+        _startButton.interactable = true;
+        _achievementsButton.interactable = true;
+        _countdown.StopCountdown();
+    }
+
+    private void StartCountdown()
     {
         _startButton.interactable = false;
         _achievementsButton.interactable = false;
