@@ -3412,6 +3412,7 @@ GameObject:
   - component: {fileID: 1373043295}
   - component: {fileID: 1373043294}
   - component: {fileID: 1373043296}
+  - component: {fileID: 1373043297}
   m_Layer: 0
   m_Name: Achievement Manager
   m_TagString: Untagged
@@ -3458,6 +3459,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04ddaf6a499949b1a940ce3274a4a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::AchievementProgressTracker
+--- !u!114 &1373043297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373043292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd96120ec2cb77439d15e4fbb9b7553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::OnSecondPassedDetection
 --- !u!1 &1410626289
 GameObject:
   m_ObjectHideFlags: 0
