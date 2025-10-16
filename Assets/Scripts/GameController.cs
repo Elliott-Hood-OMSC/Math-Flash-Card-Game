@@ -7,6 +7,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The single entry-point with high-level game functions.
+/// - Handles opening and closing menus mainly
+/// </summary>
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }

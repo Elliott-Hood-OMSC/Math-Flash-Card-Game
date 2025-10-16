@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace CommandPattern
 {
     /// <summary>
-    /// A holder to 
+    /// A holder to keep track of commands (presumably) for use in a future assignment
     /// </summary>
     public class CommandInvoker
     {

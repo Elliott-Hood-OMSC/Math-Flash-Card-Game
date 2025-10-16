@@ -7,6 +7,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for visualizing a question and invoking an event for whether it was answered correctly or not.
+/// - IMPORTANTLY knows nothing about the logic of generating the question
+/// </summary>
 public class QuestionPresenter : MonoBehaviour
 {
     [SerializeField] private Card _leftCard;

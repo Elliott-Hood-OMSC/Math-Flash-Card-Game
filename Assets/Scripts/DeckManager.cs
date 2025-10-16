@@ -6,6 +6,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Responsible for holding all decks (game 'skins') that the player is allowed to swap between
+/// </summary>
 public class DeckManager : MonoBehaviour
 {
     [SerializeField] private Deck _defaultDeck;

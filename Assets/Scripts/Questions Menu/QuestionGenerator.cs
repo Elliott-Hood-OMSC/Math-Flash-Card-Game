@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using CommandPattern;
 using UnityEngine;
 
+/// <summary>
+/// A Command class responsible for creating and calling PresentQuestion on the questionPresenter.
+/// Can be overridden to generate any kind of question info (for now, just multiplication)
+/// </summary>
 public abstract class QuestionGenerator : Command
 {
     protected QuestionPresenter _questionPresenter;
@@ -21,10 +25,14 @@ public abstract class QuestionGenerator : Command
 
     public override void Undo()
     {
-        
+        // For future implementation
     }
 }
 
+/// <summary>
+/// Creates 2 possible wrong answers, and 1 correct answer.
+/// All answers are unique. 
+/// </summary>
 public class QuestionGeneratorMultiplication : QuestionGenerator
 {
     public QuestionGeneratorMultiplication(QuestionPresenter questionPresenter)

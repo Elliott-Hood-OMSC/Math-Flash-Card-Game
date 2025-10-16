@@ -6,6 +6,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Displays the score on the end screen
+/// </summary>
 public class ResultsMenu : Menu
 {
     [SerializeField] private TextMeshProUGUI _scoreText;

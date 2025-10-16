@@ -8,12 +8,16 @@ using CommandPattern;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Controls the question presenter and timer. Presents a certain number of questions, each with their own timer and ends the game upon completion.
+/// A CommandInvoker is used to display the questions. 
+/// </summary>
 public class QuestionsMenu : Menu
 {
     [SerializeField] private QuestionPresenter _questionPresenter;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private int _numQuestions = 3;
-    [SerializeField] private int _timeLimit = 30;
+    [SerializeField] private int _timeLimit = 10;
     private Coroutine _countdownCoroutine;
     private int _questionsAnswered;
     private int _correctQuestionCount;

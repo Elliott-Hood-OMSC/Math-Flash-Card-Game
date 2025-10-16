@@ -6,6 +6,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Contains the button to start the countdown and prevents opening the achievements menu while the countdown is active.
+/// </summary>
 public class TitleScreen : Menu
 {
     [SerializeField] private Countdown _countdown;

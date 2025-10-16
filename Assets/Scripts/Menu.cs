@@ -5,6 +5,10 @@
 
 using UnityEngine;
 
+/// <summary>
+/// A simple class for showing/hiding a gameobject.
+/// Exists to be overridden with animations and other functionality at a later point.
+/// </summary>
 public class Menu : MonoBehaviour
 {
     public virtual void SetVisible(bool visible)
