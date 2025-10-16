@@ -21,7 +21,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // start listening for achievement events
-        AchievementEvents.OnProgressUpdated += OnProgressUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease += OnProgressUpdated;
         AchievementEvents.OnAchievementGet += OnAchievementGet;
         AchievementEvents.OnRoundEnded += OnRoundEnded;
     }
@@ -31,7 +31,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
     {
         if (Instance == this) Instance = null;
 
-        AchievementEvents.OnProgressUpdated -= OnProgressUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease -= OnProgressUpdated;
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
         AchievementEvents.OnRoundEnded -= OnRoundEnded;
     }
@@ -40,7 +40,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
     public void BeginRound() => _progressedThisRound.Clear();
 
     // adds tiered achievements that gained progress
-    private void OnProgressUpdated(AchievementEvents.OnTieredAchievementProgressedArgs args)
+    private void OnProgressUpdated(AchievementEvents.OnTieredAchievementArgs args)
     {
         if (args.TieredAchievement != null)
             _progressedThisRound.Add(args.TieredAchievement);

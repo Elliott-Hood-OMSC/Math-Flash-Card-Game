@@ -12,8 +12,9 @@ public static class AchievementEvents
         public Achievement AchievementObtained;
     }
 
-    public static Action<OnTieredAchievementProgressedArgs> OnProgressUpdated;
-    public struct OnTieredAchievementProgressedArgs
+    public static Action<OnTieredAchievementArgs> OnTieredAchievementTierIncrease;
+    public static Action<OnTieredAchievementArgs> OnTieredAchievementProgressUpdated;
+    public struct OnTieredAchievementArgs
     {
         public TieredAchievement TieredAchievement;
     }
@@ -23,7 +24,7 @@ public static class AchievementEvents
     #region Per-Project Events
 
     public static Action OnQuestionClicked;
-    public static Action OnSecondPassed;
+    public static Action OnMinutePassed;
     
     public static Action<OnRoundEndedArgs> OnRoundEnded;
     public struct OnRoundEndedArgs

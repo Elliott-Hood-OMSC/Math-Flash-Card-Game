@@ -24,17 +24,17 @@ public class AchievementListItemUI : MonoBehaviour
     {
         AchievementEvents.OnRefreshAllAchievements += OnRefreshAllAchievements;
         AchievementEvents.OnAchievementGet += OnAchievementGet;
-        AchievementEvents.OnProgressUpdated += OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementProgressed;
     }
 
     private void OnDestroy()
     {
         AchievementEvents.OnRefreshAllAchievements -= OnRefreshAllAchievements;
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
-        AchievementEvents.OnProgressUpdated -= OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementProgressed;
     }
 
-    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementProgressedArgs obj)
+    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementArgs obj)
     {
         UpdateUI();
     }

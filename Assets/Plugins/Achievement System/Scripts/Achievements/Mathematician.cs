@@ -5,14 +5,14 @@ public class Mathematician : TieredAchievement
 {
     public override void Subscribe()
     {
-        AchievementEvents.OnSecondPassed += OnSecondPassed;
+        AchievementEvents.OnMinutePassed += OnMinutePassed;
     }
     public override void Unsubscribe()
     {
-        AchievementEvents.OnSecondPassed -= OnSecondPassed;
+        AchievementEvents.OnMinutePassed -= OnMinutePassed;
     }
 
-    private void OnSecondPassed()
+    private void OnMinutePassed()
     {
         IncrementProgress();
     }

@@ -18,7 +18,7 @@ public class AchievementEventsLogger : MonoBehaviour
             Debug.Log($"{args.AchievementObtained.AchievementTitle} Achieved!");
         };
 
-        AchievementEvents.OnProgressUpdated += (AchievementEvents.OnTieredAchievementProgressedArgs args) =>
+        AchievementEvents.OnTieredAchievementProgressUpdated += (AchievementEvents.OnTieredAchievementArgs args) =>
         {
             if (!logTieredAchievementProgressed) return;
             string progress = $"{args.TieredAchievement.GetProgressValue()} / {args.TieredAchievement.GetTierRequirement()}";
