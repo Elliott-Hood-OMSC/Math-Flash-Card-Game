@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class TieredAchievement : Achievement
 {
-    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(_currentTierIndex+1)}";
+    public override string AchievementTitle => base.AchievementTitle + (_tiers.Length <= 1 ? "" : $" {RomanNumerals.ToRoman(_currentTierIndex+1)}");
     public override string AchievementDescription => _currentTier.TierDescription;
     public override Sprite AchievementThumbnail => _currentTier.TierThumbnail;
     

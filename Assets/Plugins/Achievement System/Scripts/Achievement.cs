@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Achievement : ScriptableObject
 {
-    public virtual string AchievementTitle => GetType().ToString();
+    public virtual string AchievementTitle => NicifyName(GetType().ToString());
     public virtual string AchievementDescription => _description;
     public virtual Sprite AchievementThumbnail => _thumbnail;
     public bool HasAchievement => _achievementGotten;
@@ -39,5 +39,12 @@ public abstract class Achievement : ScriptableObject
     public virtual void Load()
     {
         _achievementGotten = PlayerPrefs.GetInt(AchievementSaveKey + "_gotten") == 1 ? true : false;
+    }
+    
+    public static string NicifyName(string name)
+    {
+        name = name.TrimStart('_');
+        name = System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
+        return char.ToUpper(name[0]) + name.Substring(1);
     }
 }
