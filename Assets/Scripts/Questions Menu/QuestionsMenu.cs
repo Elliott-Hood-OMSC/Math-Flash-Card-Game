@@ -12,12 +12,13 @@ public class QuestionsMenu : Menu
     private int _questionsAnswered;
     private int _correctQuestionCount;
     private int _timer;
-    private QuestionGenerator _questionGenerator = new QuestionGeneratorMultiplication();
+    private QuestionGenerator _displayQuestionCommand;
 
     private float _timeStarted;
     
     private void Awake()
     {
+        _displayQuestionCommand = new QuestionGeneratorMultiplication(_questionPresenter);
         _questionPresenter.OnAnswered += (bool answeredCorrectly) =>
         {
             _questionsAnswered++;
@@ -75,7 +76,7 @@ public class QuestionsMenu : Menu
         }
         
         _countdownCoroutine = StartCoroutine(Countdown());
-        _questionPresenter.PresentQuestion(_questionGenerator.GetQuestionInfo(_questionPresenter.NumAnswerCards));
+        _displayQuestionCommand.Execute();
     }
 
     private bool GameHasEnded()

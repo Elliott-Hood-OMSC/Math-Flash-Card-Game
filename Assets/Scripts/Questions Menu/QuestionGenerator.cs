@@ -1,15 +1,33 @@
 using System.Collections.Generic;
+using CommandPattern;
 using UnityEngine;
 
-public abstract class QuestionGenerator
+public abstract class QuestionGenerator : Command
 {
+    protected QuestionPresenter _questionPresenter;
+    
     protected const int NUM_NUMBERS_IN_EQUATION = 2;
-    public abstract QuestionInfo GetQuestionInfo(int numAnswers);
+    protected abstract QuestionInfo GetQuestionInfo(int numAnswers);
+    public override void Execute()
+    {
+        QuestionInfo questionInfo = GetQuestionInfo(_questionPresenter.NumAnswerCards);
+        _questionPresenter.PresentQuestion(questionInfo);
+    }
+
+    public override void Undo()
+    {
+        // What??
+    }
 }
 
 public class QuestionGeneratorMultiplication : QuestionGenerator
 {
-    public override QuestionInfo GetQuestionInfo(int numAnswers)
+    public QuestionGeneratorMultiplication(QuestionPresenter questionPresenter)
+    {
+        _questionPresenter = questionPresenter;
+    }
+    
+    protected override QuestionInfo GetQuestionInfo(int numAnswers)
     {
         QuestionInfo questionInfo = new QuestionInfo()
         {
