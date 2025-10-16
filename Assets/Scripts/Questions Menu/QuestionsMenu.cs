@@ -1,4 +1,5 @@
 using System.Collections;
+using CommandPattern;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class QuestionsMenu : Menu
     private int _correctQuestionCount;
     private int _timer;
     private QuestionGenerator _displayQuestionCommand;
+    
+    public CommandInvoker CommandInvoker { get; } = new CommandInvoker();
 
     private float _timeStarted;
     
@@ -76,7 +79,8 @@ public class QuestionsMenu : Menu
         }
         
         _countdownCoroutine = StartCoroutine(Countdown());
-        _displayQuestionCommand.Execute();
+        
+        CommandInvoker.ExecuteCommand(_displayQuestionCommand);
     }
 
     private bool GameHasEnded()

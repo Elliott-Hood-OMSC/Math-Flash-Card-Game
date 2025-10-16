@@ -16,7 +16,7 @@ public abstract class QuestionGenerator : Command
 
     public override void Undo()
     {
-        // What??
+        
     }
 }
 
@@ -74,7 +74,7 @@ public class QuestionGeneratorMultiplication : QuestionGenerator
 }
 
 /// <summary>
-/// All info needed for a question
+/// All info needed for a presented question and its answers
 /// </summary>
 public struct QuestionInfo
 {
