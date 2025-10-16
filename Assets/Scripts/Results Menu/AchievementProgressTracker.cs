@@ -1,7 +1,15 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Keeps track of achievements earned during gameplay.
+/// </summary>
 public class AchievementRoundProgressTracker : MonoBehaviour
 {
     public static AchievementRoundProgressTracker Instance { get; private set; }

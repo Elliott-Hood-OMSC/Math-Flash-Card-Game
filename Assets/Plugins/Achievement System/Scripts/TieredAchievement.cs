@@ -1,5 +1,14 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 
+/// <summary>
+/// A subclass of achievement used for achievement with multiple levels of completion.
+/// Keeps track of the current tier, the next tier, and progression with save and load functionality.
+/// </summary>
 public abstract class TieredAchievement : Achievement
 {
     public override string AchievementTitle => base.AchievementTitle + (_tiers.Length <= 1 ? "" : $" {RomanNumerals.ToRoman(_currentTierIndex+1)}");
