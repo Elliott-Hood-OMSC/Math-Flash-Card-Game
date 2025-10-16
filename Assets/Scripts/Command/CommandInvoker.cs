@@ -1,7 +1,15 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using System.Collections.Generic;
 
 namespace CommandPattern
 {
+    /// <summary>
+    /// A holder to 
+    /// </summary>
     public class CommandInvoker
     {
         private readonly Stack<Command> _undoStack = new Stack<Command>();
