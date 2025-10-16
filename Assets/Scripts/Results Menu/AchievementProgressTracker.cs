@@ -73,7 +73,13 @@ public class AchievementRoundProgressTracker : MonoBehaviour
         var list = _progressedThisRound
             .Where(a => a != null)
             .OrderByDescending(a => a.HasAchievement)
-            .ThenBy(a => a.AchievementTitle)
+            .ThenBy<Achievement, string>(a =>
+            {
+                // Use AchievementTitleNoTier if this is a TieredAchievement
+                if (a is TieredAchievement tiered)
+                    return tiered.AchievementTitleNoTier;
+                return a.AchievementTitle;
+            })
             .ToArray();
 
         _progressedThisRound.Clear();
