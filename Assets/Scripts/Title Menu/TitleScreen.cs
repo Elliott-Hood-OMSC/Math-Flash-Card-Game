@@ -1,6 +1,14 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Contains the button to start the countdown and prevents opening the achievements menu while the countdown is active.
+/// </summary>
 public class TitleScreen : Menu
 {
     [SerializeField] private Countdown _countdown;
@@ -20,7 +28,14 @@ public class TitleScreen : Menu
         _startButton.onClick.AddListener(StartCountdown);
     }
 
-    public void StartCountdown()
+    public void StopCountdown()
+    {
+        _startButton.interactable = true;
+        _achievementsButton.interactable = true;
+        _countdown.StopCountdown();
+    }
+
+    private void StartCountdown()
     {
         _startButton.interactable = false;
         _achievementsButton.interactable = false;

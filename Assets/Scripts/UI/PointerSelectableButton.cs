@@ -1,10 +1,15 @@
-using UnityEngine;
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// Automatically selects the button when the pointer enters it, and broadcasts selection events
+/// A button wrapper that automatically selects the button when the pointer enters it, and broadcasts selection events.
+/// Used so that players seamlessly switch to keyboard/controller after hovering over an item with their mouse.
 /// </summary>
 public class PointerSelectableButton : Button
 {

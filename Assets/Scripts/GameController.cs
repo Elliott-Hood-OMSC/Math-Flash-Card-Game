@@ -1,7 +1,16 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The single entry-point with high-level game functions.
+/// - Handles opening and closing menus mainly
+/// </summary>
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
@@ -42,6 +51,7 @@ public class GameController : MonoBehaviour
         _restartButton.onClick.AddListener(() =>
         {
             ReturnToTitleScreen();
+            _titleScreenPanel.StopCountdown();
         });
         _deckTypeButton.onClick.AddListener(() =>
         {
@@ -52,6 +62,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        AchievementRoundProgressTracker.Instance.BeginRound();
         _titleScreenPanel.SetVisible(false);
         _questionsPanel.SetVisible(true);
         _resultsPanel.SetVisible(false);

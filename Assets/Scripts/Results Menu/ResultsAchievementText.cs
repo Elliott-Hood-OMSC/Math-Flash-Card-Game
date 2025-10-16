@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Displays all new achievements earned / upgraded at the end of each round (tracked by AchievementRoundProgressTracker).
+/// </summary>
 public class ResultsAchievementsTextTMP : MonoBehaviour
 {
     [Header("References")]
