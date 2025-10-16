@@ -23,8 +23,8 @@ public abstract class TieredAchievement : Achievement
 
     private int _progress;
 
-    public int GetProgressValue() => _progress;
-    public int GetTierRequirement() => _currentTier.Requirement;
+    public virtual int GetProgressValue() => _progress;
+    public virtual int GetTierRequirement() => _currentTier.Requirement;
     public float GetProgressPercentage() => (float)GetProgressValue() / GetTierRequirement();
 
     protected void IncrementProgress()

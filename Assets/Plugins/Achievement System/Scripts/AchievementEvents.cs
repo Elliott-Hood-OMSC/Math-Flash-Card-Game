@@ -24,7 +24,7 @@ public static class AchievementEvents
     #region Per-Project Events
 
     public static Action OnQuestionClicked;
-    public static Action OnMinutePassed;
+    public static Action OnSecondPassed;
     
     public static Action<OnRoundEndedArgs> OnRoundEnded;
     public struct OnRoundEndedArgs
