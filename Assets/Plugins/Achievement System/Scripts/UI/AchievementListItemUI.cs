@@ -24,17 +24,19 @@ public class AchievementListItemUI : MonoBehaviour
     {
         AchievementEvents.OnRefreshAllAchievements += OnRefreshAllAchievements;
         AchievementEvents.OnAchievementGet += OnAchievementGet;
-        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease += OnTieredAchievementUpdated;
     }
 
     private void OnDestroy()
     {
         AchievementEvents.OnRefreshAllAchievements -= OnRefreshAllAchievements;
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
-        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease -= OnTieredAchievementUpdated;
     }
 
-    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementArgs obj)
+    private void OnTieredAchievementUpdated(AchievementEvents.OnTieredAchievementArgs obj)
     {
         UpdateUI();
     }
@@ -57,6 +59,8 @@ public class AchievementListItemUI : MonoBehaviour
 
     private void UpdateUI()
     {
+        if (_trackedAchievement == null) return;
+        
         titleText.text = _trackedAchievement.AchievementTitle;
         descriptionText.text = _trackedAchievement.AchievementDescription;
         icon.sprite = _trackedAchievement.AchievementThumbnail;

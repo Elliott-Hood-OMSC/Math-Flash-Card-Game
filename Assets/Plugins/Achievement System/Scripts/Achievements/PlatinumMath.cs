@@ -6,16 +6,18 @@ public class PlatinumMath : Achievement
     public override void Subscribe()
     {
         AchievementEvents.OnAchievementGet += OnAchievementGet;
-        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease += OnTieredAchievementUpdated;
     }
 
     public override void Unsubscribe()
     {
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
-        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease -= OnTieredAchievementUpdated;
     }
 
-    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementArgs obj)
+    private void OnTieredAchievementUpdated(AchievementEvents.OnTieredAchievementArgs obj)
     {
         CheckIfCompleted();
     }
