@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        AchievementRoundProgressTracker.Instance.BeginRound();
         _titleScreenPanel.SetVisible(false);
         _questionsPanel.SetVisible(true);
         _resultsPanel.SetVisible(false);
