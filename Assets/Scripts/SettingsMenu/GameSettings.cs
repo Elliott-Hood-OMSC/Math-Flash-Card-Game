@@ -6,5 +6,7 @@
 public class GameSettings
 {
     public AchievementEvents.RoundProblemType QuestionsType { get; set; }
+
+    public int NumQuestions { get; set; }
 }
 

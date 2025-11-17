@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsMenu : Menu
 {
+    [SerializeField] private TextMeshProUGUI _numQuestionsLabel;
+    [SerializeField] private Slider _numQuestions;
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _submitSettingsButton;
     [SerializeField] private SettingsButtonQuestionType[] _buttons;
@@ -14,6 +17,13 @@ public class SettingsMenu : Menu
 
     private void Awake()
     {
+        _numQuestions.minValue = 3;
+        _numQuestions.maxValue = 5;
+        _numQuestions.wholeNumbers = true;
+        _numQuestions.onValueChanged.AddListener((float value) =>
+        {
+            _numQuestionsLabel.text = $"Num Questions: {value}";
+        });
         _backButton.onClick.AddListener(OnClickBack);
         _submitSettingsButton.onClick.AddListener(OnClickStartGame);
         
@@ -36,6 +46,7 @@ public class SettingsMenu : Menu
     private void OnClickStartGame()
     {
         GameController.Instance.GameSettings.QuestionsType = _selectedButton.Type;
+        GameController.Instance.GameSettings.NumQuestions = (int)_numQuestions.value;
         OnSubmitSettingsAction?.Invoke();
         SetVisible(false);
     }
