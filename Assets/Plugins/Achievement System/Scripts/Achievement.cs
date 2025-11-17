@@ -1,14 +1,36 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 
+/// <summary>
+/// An abstract base achievement class with virtual fields for
+/// - descriptions
+/// - completion
+/// - subscription
+///
+/// Also contains:
+/// - save keys
+/// - saving/loading completion
+/// </summary>
 public abstract class Achievement : ScriptableObject
 {
-    public virtual string AchievementTitle => GetType().ToString();
+    public virtual string AchievementTitle => NicifyName(GetType().ToString());
+    private static string NicifyName(string name)
+    {
+        name = name.TrimStart('_');
+        name = System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
+        return char.ToUpper(name[0]) + name.Substring(1);
+    }
+    
     public virtual string AchievementDescription => _description;
     public virtual Sprite AchievementThumbnail => _thumbnail;
     public bool HasAchievement => _achievementGotten;
-    private bool _achievementGotten = false;
-    
     public virtual bool IsMaxed => _achievementGotten;
+    
+    private bool _achievementGotten;
     
     [TextArea]
     [SerializeField] private string _description;

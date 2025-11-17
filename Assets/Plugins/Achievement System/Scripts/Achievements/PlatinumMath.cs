@@ -1,3 +1,8 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Achievements/" + nameof(PlatinumMath), fileName = nameof(PlatinumMath))]
@@ -6,16 +11,18 @@ public class PlatinumMath : Achievement
     public override void Subscribe()
     {
         AchievementEvents.OnAchievementGet += OnAchievementGet;
-        AchievementEvents.OnProgressUpdated += OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated += OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease += OnTieredAchievementUpdated;
     }
 
     public override void Unsubscribe()
     {
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
-        AchievementEvents.OnProgressUpdated -= OnTieredAchievementProgressed;
+        AchievementEvents.OnTieredAchievementProgressUpdated -= OnTieredAchievementUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease -= OnTieredAchievementUpdated;
     }
 
-    private void OnTieredAchievementProgressed(AchievementEvents.OnTieredAchievementProgressedArgs obj)
+    private void OnTieredAchievementUpdated(AchievementEvents.OnTieredAchievementArgs obj)
     {
         CheckIfCompleted();
     }

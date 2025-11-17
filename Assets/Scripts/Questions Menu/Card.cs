@@ -1,8 +1,15 @@
-using System;
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// A simple card view that caches rank and suit, and listens to the DeckManager for changes in the deck to update visuals properly.
+/// </summary>
 [RequireComponent(typeof(Image))]
 public class Card : MonoBehaviour
 {

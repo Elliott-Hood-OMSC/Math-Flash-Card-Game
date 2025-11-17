@@ -1,12 +1,21 @@
-using System;
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Counts down from a duration and shakes the text. (The time for each second is shortened because waiting is boring.)
+/// Starts the game upon completion
+/// </summary>
 public class Countdown : MonoBehaviour
 {
-    [SerializeField] private float _secondTime = 0.7f;
+    [SerializeField] private int _duration = 5;
+    [SerializeField] private float _secondTime = 0.6f;
     [SerializeField] private TextMeshProUGUI _countdownText;
     private Coroutine _currentCountdown;
     private Vector2 _originalTextAnchorPos;
@@ -18,12 +27,17 @@ public class Countdown : MonoBehaviour
 
     public void StartCountdown()
     {
-        if (_currentCountdown != null)
-            StopCoroutine(_currentCountdown);
-        
+        StopCountdown();
+
         _currentCountdown = StartCoroutine(CountdownCoroutine());
     }
-    
+
+    public void StopCountdown()
+    {
+        if (_currentCountdown != null)
+            StopCoroutine(_currentCountdown);
+    }
+
     private IEnumerator CountdownCoroutine()
     {
         void Shake()
@@ -36,7 +50,7 @@ public class Countdown : MonoBehaviour
                 .Append(_countdownText.rectTransform.DOAnchorPos(_originalTextAnchorPos, 0.05f)); // smooth reset
         }
         
-        for (int i = 5; i > 0; i--)
+        for (int i = _duration; i > 0; i--)
         {
             _countdownText.text = i.ToString();
             Shake();
