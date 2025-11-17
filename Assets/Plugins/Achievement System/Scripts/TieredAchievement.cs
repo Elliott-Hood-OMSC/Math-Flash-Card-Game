@@ -1,8 +1,18 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 
+/// <summary>
+/// A subclass of achievement used for achievement with multiple levels of completion.
+/// Keeps track of the current tier, the next tier, and progression with save and load functionality.
+/// </summary>
 public abstract class TieredAchievement : Achievement
 {
-    public override string AchievementTitle => $"{GetType()} {RomanNumerals.ToRoman(_currentTierIndex+1)}";
+    public string AchievementTitleNoTier => base.AchievementTitle;
+    public override string AchievementTitle => base.AchievementTitle + (_tiers.Length <= 1 ? "" : $" {RomanNumerals.ToRoman(_currentTierIndex+1)}");
     public override string AchievementDescription => _currentTier.TierDescription;
     public override Sprite AchievementThumbnail => _currentTier.TierThumbnail;
     
@@ -23,8 +33,8 @@ public abstract class TieredAchievement : Achievement
 
     private int _progress;
 
-    public int GetProgressValue() => _progress;
-    public int GetTierRequirement() => _currentTier.Requirement;
+    public virtual int GetProgressValue() => _progress;
+    public virtual int GetTierRequirement() => _currentTier.Requirement;
     public float GetProgressPercentage() => (float)GetProgressValue() / GetTierRequirement();
 
     protected void IncrementProgress()
@@ -38,7 +48,7 @@ public abstract class TieredAchievement : Achievement
         
         _progress++;
 
-        AchievementEvents.OnProgressUpdated?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnTieredAchievementProgressUpdated?.Invoke(new AchievementEvents.OnTieredAchievementArgs
         {
             TieredAchievement = this,
         });
@@ -62,7 +72,7 @@ public abstract class TieredAchievement : Achievement
             _currentTier = _tiers[_currentTierIndex];
         }
 
-        AchievementEvents.OnProgressUpdated?.Invoke(new AchievementEvents.OnTieredAchievementProgressedArgs
+        AchievementEvents.OnTieredAchievementTierIncrease?.Invoke(new AchievementEvents.OnTieredAchievementArgs
         {
             TieredAchievement = this,
         });

@@ -1,5 +1,14 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 
+/// <summary>
+/// Initializes and keeps a reference to all achievements on load as a persistent singleton.
+/// Has the functionality to reset PlayerPrefs.
+/// </summary>
 public class AchievementManager : MonoBehaviour
 {
     public static AchievementManager Instance { get; private set; }

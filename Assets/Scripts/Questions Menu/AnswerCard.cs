@@ -1,9 +1,18 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Invokes an event on click.
+/// A glorified button that shakes and animates when hovered or selected.
+/// </summary>
 [RequireComponent(typeof(PointerSelectableButton))]
 public class AnswerCard : MonoBehaviour
 {

@@ -1,7 +1,15 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Keeps track of achievements earned during gameplay.
+/// </summary>
 public class AchievementRoundProgressTracker : MonoBehaviour
 {
     public static AchievementRoundProgressTracker Instance { get; private set; }
@@ -21,7 +29,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // start listening for achievement events
-        AchievementEvents.OnProgressUpdated += OnProgressUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease += OnProgressUpdated;
         AchievementEvents.OnAchievementGet += OnAchievementGet;
         AchievementEvents.OnRoundEnded += OnRoundEnded;
     }
@@ -31,7 +39,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
     {
         if (Instance == this) Instance = null;
 
-        AchievementEvents.OnProgressUpdated -= OnProgressUpdated;
+        AchievementEvents.OnTieredAchievementTierIncrease -= OnProgressUpdated;
         AchievementEvents.OnAchievementGet -= OnAchievementGet;
         AchievementEvents.OnRoundEnded -= OnRoundEnded;
     }
@@ -40,7 +48,7 @@ public class AchievementRoundProgressTracker : MonoBehaviour
     public void BeginRound() => _progressedThisRound.Clear();
 
     // adds tiered achievements that gained progress
-    private void OnProgressUpdated(AchievementEvents.OnTieredAchievementProgressedArgs args)
+    private void OnProgressUpdated(AchievementEvents.OnTieredAchievementArgs args)
     {
         if (args.TieredAchievement != null)
             _progressedThisRound.Add(args.TieredAchievement);
@@ -65,7 +73,13 @@ public class AchievementRoundProgressTracker : MonoBehaviour
         var list = _progressedThisRound
             .Where(a => a != null)
             .OrderByDescending(a => a.HasAchievement)
-            .ThenBy(a => a.AchievementTitle)
+            .ThenBy<Achievement, string>(a =>
+            {
+                // Use AchievementTitleNoTier if this is a TieredAchievement
+                if (a is TieredAchievement tiered)
+                    return tiered.AchievementTitleNoTier;
+                return a.AchievementTitle;
+            })
             .ToArray();
 
         _progressedThisRound.Clear();

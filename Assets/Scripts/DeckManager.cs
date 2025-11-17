@@ -1,6 +1,14 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Responsible for holding all decks (game 'skins') that the player is allowed to swap between
+/// </summary>
 public class DeckManager : MonoBehaviour
 {
     [SerializeField] private Deck _defaultDeck;

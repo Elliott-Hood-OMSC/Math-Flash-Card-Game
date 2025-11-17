@@ -1,22 +1,36 @@
+// Name: Elliott Hood - Noah Vu
+// Student ID: 2422722 - 2424329
+// Email: dhood@chapman.edu - novu@chapman.edu
+// Course: GAME 245-01
+
 using System.Collections;
+using CommandPattern;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Controls the question presenter and timer. Presents a certain number of questions, each with their own timer and ends the game upon completion.
+/// A CommandInvoker is used to display the questions. 
+/// </summary>
 public class QuestionsMenu : Menu
 {
     [SerializeField] private QuestionPresenter _questionPresenter;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private int _numQuestions = 3;
-    [SerializeField] private int _timeLimit = 30;
+    [SerializeField] private int _timeLimit = 10;
     private Coroutine _countdownCoroutine;
     private int _questionsAnswered;
     private int _correctQuestionCount;
     private int _timer;
+    private QuestionGenerator _displayQuestionCommand;
+    
+    public CommandInvoker CommandInvoker { get; } = new CommandInvoker();
 
     private float _timeStarted;
     
     private void Awake()
     {
+        _displayQuestionCommand = new QuestionGeneratorMultiplication(_questionPresenter);
         _questionPresenter.OnAnswered += (bool answeredCorrectly) =>
         {
             _questionsAnswered++;
@@ -74,7 +88,8 @@ public class QuestionsMenu : Menu
         }
         
         _countdownCoroutine = StartCoroutine(Countdown());
-        _questionPresenter.PresentQuestion();
+        
+        CommandInvoker.ExecuteCommand(_displayQuestionCommand);
     }
 
     private bool GameHasEnded()
