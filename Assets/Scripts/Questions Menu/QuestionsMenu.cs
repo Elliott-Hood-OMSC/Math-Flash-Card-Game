@@ -17,7 +17,6 @@ public class QuestionsMenu : Menu
 {
     [SerializeField] private QuestionPresenter _questionPresenter;
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private int _numQuestions = 3;
     [SerializeField] private int _timeLimit = 10;
     private Coroutine _countdownCoroutine;
     private int _questionsAnswered;
@@ -121,7 +120,7 @@ public class QuestionsMenu : Menu
 
     private bool GameHasEnded()
     {
-        return _questionsAnswered >= _numQuestions;
+        return _questionsAnswered >= GameController.Instance.GameSettings.NumQuestions;
     }
 
     private IEnumerator Countdown()
