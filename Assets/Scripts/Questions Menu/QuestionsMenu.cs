@@ -7,6 +7,7 @@ using System.Collections;
 using CommandPattern;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the question presenter and timer. Presents a certain number of questions, each with their own timer and ends the game upon completion.
@@ -30,7 +31,6 @@ public class QuestionsMenu : Menu
     
     private void Awake()
     {
-        _displayQuestionCommand = new QuestionGeneratorMultiplication(_questionPresenter);
         _questionPresenter.OnAnswered += (bool answeredCorrectly) =>
         {
             _questionsAnswered++;
@@ -38,15 +38,40 @@ public class QuestionsMenu : Menu
             {
                 _correctQuestionCount++;
             }
-            
+
             AchievementEvents.OnQuestionAnswered?.Invoke(new AchievementEvents.OnQuestionAnsweredArgs
             {
                 AnsweredCorrectly = answeredCorrectly,
                 TimeRemaining = _timer
             });
-            
+
             TryPresentNextQuestion();
         };
+    }
+
+    private void SetupQuestionGeneratorForRoundProblemType()
+    {
+        switch (GameController.Instance.GameSettings.QuestionsType)
+        {
+            case AchievementEvents.RoundProblemType.Addition:
+                _displayQuestionCommand = new QuestionGeneratorAddition(_questionPresenter);
+                break;
+            case AchievementEvents.RoundProblemType.Subtraction:
+                _displayQuestionCommand = new QuestionGeneratorSubtraction(_questionPresenter);
+                break;
+            case AchievementEvents.RoundProblemType.Multiplication:
+                _displayQuestionCommand = new QuestionGeneratorMultiplication(_questionPresenter);
+                break;
+            case AchievementEvents.RoundProblemType.Division:
+                _displayQuestionCommand = new QuestionGeneratorDivision(_questionPresenter);
+                break;
+            case AchievementEvents.RoundProblemType.All:
+                _displayQuestionCommand = new QuestionGeneratorAll(_questionPresenter);
+                break;
+            default:
+                _displayQuestionCommand = new QuestionGeneratorMultiplication(_questionPresenter);
+                break;
+        }
     }
 
     public override void SetVisible(bool visible)
@@ -68,6 +93,7 @@ public class QuestionsMenu : Menu
         _questionsAnswered = 0;
         _correctQuestionCount = 0;
         _timeStarted = Time.time;
+        SetupQuestionGeneratorForRoundProblemType();
         TryPresentNextQuestion();
     }
 
@@ -82,6 +108,7 @@ public class QuestionsMenu : Menu
                 NumQuestionsAnswered = _questionsAnswered,
                 NumCorrectQuestions = _correctQuestionCount,
                 TotalTimeTaken = Time.time - _timeStarted,
+                RoundType = GameController.Instance.GameSettings.QuestionsType
             });
             GameController.Instance.EndGame(_correctQuestionCount, _questionsAnswered);
             return;

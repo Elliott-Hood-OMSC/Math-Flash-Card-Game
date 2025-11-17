@@ -28,14 +28,16 @@ public class Countdown : MonoBehaviour
     public void StartCountdown()
     {
         StopCountdown();
+        gameObject.SetActive(true);
 
         _currentCountdown = StartCoroutine(CountdownCoroutine());
     }
 
     public void StopCountdown()
     {
-        if (_currentCountdown != null)
-            StopCoroutine(_currentCountdown);
+        gameObject.SetActive(false);
+        
+        if (_currentCountdown != null) StopCoroutine(_currentCountdown);
     }
 
     private IEnumerator CountdownCoroutine()
@@ -60,6 +62,7 @@ public class Countdown : MonoBehaviour
         Shake();
         yield return new WaitForSeconds(_secondTime);
         GameController.Instance.StartGame();
+        StopCountdown();
     }
 
     public void ResetCountdownText()

@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -13,6 +14,7 @@ using UnityEngine;
 /// </summary>
 public class QuestionPresenter : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _operationSignText;
     [SerializeField] private Card _leftCard;
     [SerializeField] private Card _rightCard;
     [SerializeField] private List<AnswerCard> _answerCards;
@@ -55,6 +57,7 @@ public class QuestionPresenter : MonoBehaviour
             }
         }
 
+        _operationSignText.text = questionInfo.OperationSign;
         _leftCard.SetCardValue(questionInfo.QuestionDisplay.Numbers[0]);
         _rightCard.SetCardValue(questionInfo.QuestionDisplay.Numbers[1]);
     }

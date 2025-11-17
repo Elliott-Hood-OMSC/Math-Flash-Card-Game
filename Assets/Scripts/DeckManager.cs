@@ -48,6 +48,7 @@ public class Deck
 {
     public string DeckName;
     public Sprite[] CardSprites;
+    public Sprite JokerSprite;
     
     const int NUM_SUITES = 4;
 
@@ -55,6 +56,13 @@ public class Deck
     {
         int rankIndex = (rank - 1) * NUM_SUITES;
 
-        return CardSprites[rankIndex + suit];
+        try
+        {
+            return CardSprites[rankIndex + suit];
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

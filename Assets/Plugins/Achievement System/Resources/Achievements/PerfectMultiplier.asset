@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48db4f665bbe4d0891dec36ec78ed39, type: 3}
   m_Name: PerfectMultiplier
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::PerfectRoundAchievement
-  _description: 
+  _description: Get a perfect score in an Multiplication round.
   _thumbnail: {fileID: 0}
-  targetRoundType: 0
-  customTitle: 
+  targetRoundType: 2
