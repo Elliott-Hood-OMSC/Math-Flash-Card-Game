@@ -3,6 +3,8 @@
 // Email: dhood@chapman.edu - novu@chapman.edu
 // Course: GAME 245-01
 
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,6 +15,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Image))]
 public class Card : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _jokerNumberText;
     private Image _spriteRenderer;
     private int _rank;
     private int _suit;
@@ -36,7 +39,17 @@ public class Card : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        Sprite randomSuitOfRank = GameController.Instance.DeckManager.CurrentDeck.GetCard(_rank, _suit);
-        _spriteRenderer.sprite = randomSuitOfRank;
+        Deck deck = GameController.Instance.DeckManager.CurrentDeck;
+        Sprite randomCardSprite = deck.GetCard(_rank, _suit);
+        if (randomCardSprite == null)
+        {
+            _spriteRenderer.sprite = deck.JokerSprite;
+            _jokerNumberText.text = _rank.ToString();
+        }
+        else
+        {
+            _jokerNumberText.text = String.Empty;
+            _spriteRenderer.sprite = randomCardSprite;
+        }
     }
 }
