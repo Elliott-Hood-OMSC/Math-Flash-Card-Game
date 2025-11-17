@@ -27,19 +27,35 @@ public class GameController : MonoBehaviour
     [SerializeField] private Button _deckTypeButton;
     [SerializeField] private TextMeshProUGUI _deckTypeText;
 
+    private readonly StateMachine _stateMachine = new StateMachine();
+    private MainMenuState _mainMenuState;
+    private GameState _gameState;
+    private ResultsState _resultsState;
 
     private void Awake()
     {
+        #region Singleton
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Instance = this;
         }
-        ReturnToTitleScreen();
         
+        #endregion
+        
+        InitializeButtonListeners();
+        InitializeStateMachine();
+        
+        ReturnToTitleScreen();
+    }
+
+    private void InitializeButtonListeners()
+    {
         _quitButton.onClick.AddListener(() =>
         {
 #if UNITY_EDITOR
@@ -60,27 +76,86 @@ public class GameController : MonoBehaviour
         });
     }
 
+    private void InitializeStateMachine()
+    {
+        _mainMenuState = new MainMenuState
+        {
+            TitleScreenPanel = _titleScreenPanel
+        };
+        _gameState = new GameState
+        {
+            QuestionsPanel = _questionsPanel
+        };
+        _resultsState = new ResultsState
+        {
+            ResultsPanel = _resultsPanel
+        };
+    }
+
+    private void Update()
+    {
+        _stateMachine.Update();
+    }
+
     public void StartGame()
     {
-        AchievementRoundProgressTracker.Instance.BeginRound();
-        _titleScreenPanel.SetVisible(false);
-        _questionsPanel.SetVisible(true);
-        _resultsPanel.SetVisible(false);
+        _stateMachine.ChangeState(_gameState);
     }
 
     public void EndGame(int score, int numQuestions)
     {
         _resultsPanel.SetScore(score, numQuestions);
-        
-        _titleScreenPanel.SetVisible(false);
-        _questionsPanel.SetVisible(false);
-        _resultsPanel.SetVisible(true);
+        _stateMachine.ChangeState(_resultsState);
     }
 
-    public void ReturnToTitleScreen()
+    private void ReturnToTitleScreen()
     {
-        _titleScreenPanel.SetVisible(true);
-        _questionsPanel.SetVisible(false);
-        _resultsPanel.SetVisible(false);
+        _stateMachine.ChangeState(_mainMenuState);
+    }
+
+    private class MainMenuState : IState
+    {
+        public Menu TitleScreenPanel { get; set; }
+
+        public void Enter()
+        {
+            TitleScreenPanel.SetVisible(true);
+        }
+
+        public void Exit()
+        {
+            TitleScreenPanel.SetVisible(false);
+        }
+    }
+
+    private class GameState : IState
+    {
+        public Menu QuestionsPanel { get; set; }
+
+        public void Enter()
+        {
+            QuestionsPanel.SetVisible(true);
+            AchievementRoundProgressTracker.Instance.BeginRound();
+        }
+
+        public void Exit()
+        {
+            QuestionsPanel.SetVisible(false);
+        }
+    }
+
+    private class ResultsState : IState
+    {
+        public Menu ResultsPanel { get; set; }
+
+        public void Enter()
+        {
+            ResultsPanel.SetVisible(true);
+        }
+
+        public void Exit()
+        {
+            ResultsPanel.SetVisible(false);
+        }
     }
 }
