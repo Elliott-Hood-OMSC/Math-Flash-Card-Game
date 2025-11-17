@@ -21,6 +21,16 @@ public static class AchievementEvents
     #endregion
     
     #region Per-Project Events
+    
+    // NEW: ROUND TYPES
+    public enum RoundProblemType
+    {
+        Addition,
+        Subtraction,
+        Multiplication,
+        Division,
+        All
+    }
 
     public static Action OnQuestionClicked;
     public static Action OnSecondPassed;
@@ -31,6 +41,9 @@ public static class AchievementEvents
         public int NumQuestionsAnswered;
         public int NumCorrectQuestions;
         public float TotalTimeTaken;
+        
+        // NEW: what kind of round just ended
+        public RoundProblemType RoundType;
     }
     
     public static Action<OnQuestionAnsweredArgs> OnQuestionAnswered;
