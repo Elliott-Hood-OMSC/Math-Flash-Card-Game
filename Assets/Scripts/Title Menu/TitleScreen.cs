@@ -13,6 +13,7 @@ public class TitleScreen : Menu
 {
     [SerializeField] private Countdown _countdown;
     [SerializeField] private Button _startButton;
+    [SerializeField] private SettingsMenu _settingsMenu;
     [SerializeField] private Button _achievementsButton;
     
     public override void SetVisible(bool visible)
@@ -25,7 +26,13 @@ public class TitleScreen : Menu
     
     private void Awake()
     {
-        _startButton.onClick.AddListener(StartCountdown);
+        _startButton.onClick.AddListener(OnClickStartButton);
+    }
+
+    private void OnClickStartButton()
+    {
+        _settingsMenu.SetVisible(true);
+        _settingsMenu.OnSubmitSettingsAction = StartCountdown;
     }
 
     public void StopCountdown()

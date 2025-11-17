@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::PerfectRoundAchievement
   _description: 
   _thumbnail: {fileID: 0}
-  targetRoundType: 0
-  customTitle: 
+  targetRoundType: 3

@@ -32,7 +32,6 @@ public static class AchievementEvents
     
     #region Per-Project Events
     
-    // NEW: ROUND TYPES
     public enum RoundProblemType
     {
         Addition,
@@ -41,7 +40,7 @@ public static class AchievementEvents
         Division,
         All
     }
-
+    
     public static Action OnQuestionClicked;
     public static Action OnSecondPassed;
     

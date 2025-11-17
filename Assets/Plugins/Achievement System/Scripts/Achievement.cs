@@ -17,7 +17,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Achievement : ScriptableObject
 {
-    public virtual string AchievementTitle => NicifyName(GetType().ToString());
+    public virtual string AchievementTitle => NicifyName(name);
     private static string NicifyName(string name)
     {
         name = name.TrimStart('_');

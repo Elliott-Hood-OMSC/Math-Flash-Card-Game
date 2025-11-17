@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Button _deckTypeButton;
     [SerializeField] private TextMeshProUGUI _deckTypeText;
 
+    public GameSettings GameSettings { get; private set; } = new GameSettings();
     private readonly StateMachine _stateMachine = new StateMachine();
     private MainMenuState _mainMenuState;
     private GameState _gameState;
@@ -47,7 +48,7 @@ public class GameController : MonoBehaviour
         }
         
         #endregion
-        
+
         InitializeButtonListeners();
         InitializeStateMachine();
         
